@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CMEstore.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CMEstore.Data
@@ -12,5 +13,7 @@ namespace CMEstore.Data
         {
             
         }
+
+        public DbSet<Brand> Brand { get; set; }
     }
 }
