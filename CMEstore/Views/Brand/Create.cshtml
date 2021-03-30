@@ -2,7 +2,7 @@
 
 <form method="post" asp-action="Create">
     <div class="border p-3">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
         <div class="form-group row">
             <h2 class="text-info pl-3">Добавить Бренд</h2>
         </div>
@@ -45,8 +45,12 @@
                 @* Keep this empty *@
             </div>
         </div>
-
     </div>
 
 </form>
 
+@section Scripts{ 
+
+    @{ <partial name="_ValidationScriptsPartial" /> }
+
+}
