@@ -43,9 +43,13 @@ namespace CMEstore.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Brand obj)
         {
-            _db.Brand.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                _db.Brand.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
         }
     }
 }
