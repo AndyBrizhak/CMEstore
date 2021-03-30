@@ -72,5 +72,25 @@ namespace CMEstore.Controllers
 
             return View(obj);
         }
+
+        //POST - EDIT
+        /// <summary>
+        /// POST Request for edit Brand
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Brand obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Brand.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+
+        }
     }
 }
