@@ -17,10 +17,23 @@ namespace CMEstore.Controllers
             _db = db;
         }
 
+        /// <summary>
+        /// Get all Brands
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             IEnumerable<Brand> objList = _db.Brand;
             return View(objList);
+        }
+
+        /// <summary>
+        /// GET Request for create new Brand
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Create()
+        {
+            return View();
         }
     }
 }
