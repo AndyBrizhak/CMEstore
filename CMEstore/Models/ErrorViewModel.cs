@@ -1,5 +1,3 @@
-using System;
-
 namespace CMEstore.Models
 {
     public class ErrorViewModel
