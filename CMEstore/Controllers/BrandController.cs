@@ -35,5 +35,20 @@ namespace CMEstore.Controllers
         {
             return View();
         }
+
+
+        /// <summary>
+        /// POST Request for create new Brand
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Brand obj)
+        {
+            _db.Brand.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
