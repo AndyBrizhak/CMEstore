@@ -92,5 +92,49 @@ namespace CMEstore.Controllers
             return View(obj);
 
         }
+
+        //GET - DELETE
+        /// <summary>
+        /// GET Request for delete Brand
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Brand.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        //POST - DELETE
+        /// <summary>
+        /// POST Request for delete Brand
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.Brand.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.Brand.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+
+
+        }
+
     }
 }
