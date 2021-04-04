@@ -11,5 +11,6 @@ namespace CMEstore.Data
         }
 
         public DbSet<Brand> Brand { get; set; }
+        public DbSet<Product> Product { get; set; }
     }
 }
