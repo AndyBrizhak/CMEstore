@@ -32,17 +32,28 @@ namespace CMEstore.Controllers
         }
 
 
-        //GET - CREATE
-        public IActionResult Create()
+        //GET - UPSERT
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            Product product = new Product();
+            if (id == null)
+            {
+                //this is for create
+                return View(product);
+            }
+
+            product = _db.Product.Find(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
         }
 
-
-        //POST - CREATE
+        //POST - UPSERT
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Brand obj)
+        public IActionResult Upsert(Brand obj)
         {
             if (ModelState.IsValid)
             {
@@ -51,39 +62,6 @@ namespace CMEstore.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj);
-
-        }
-
-
-        //GET - EDIT
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var obj = _db.Brand.Find(id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-
-            return View(obj);
-        }
-
-        //POST - EDIT
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(Brand obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Brand.Update(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-
         }
 
         //GET - DELETE
