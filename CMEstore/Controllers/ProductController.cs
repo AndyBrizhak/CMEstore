@@ -18,7 +18,10 @@ namespace CMEstore.Controllers
             _db = db;
         }
 
-
+        /// <summary>
+        /// GET Index
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             IEnumerable<Product> objList = _db.Product;
@@ -32,7 +35,12 @@ namespace CMEstore.Controllers
         }
 
 
-        //GET - UPSERT
+        
+        /// <summary>
+        /// GET - UPSERT
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Upsert(int? id)
         {
             Product product = new Product();
@@ -50,7 +58,11 @@ namespace CMEstore.Controllers
             return View(product);
         }
 
-        //POST - UPSERT
+        /// <summary>
+        /// POST - UPSERT
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Upsert(Brand obj)
@@ -64,7 +76,11 @@ namespace CMEstore.Controllers
             return View(obj);
         }
 
-        //GET - DELETE
+        /// <summary>
+        /// GET - DELETE
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -99,4 +115,4 @@ namespace CMEstore.Controllers
 
     }
 }
-}
+
