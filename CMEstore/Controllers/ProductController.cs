@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CMEstore.Data;
 using CMEstore.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CMEstore.Controllers
 {
@@ -43,6 +44,14 @@ namespace CMEstore.Controllers
         /// <returns></returns>
         public IActionResult Upsert(int? id)
         {
+            IEnumerable<SelectListItem> BrandDropDown = _db.Brand.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+
+            ViewBag.BrandDropDown = BrandDropDown;
+
             Product product = new Product();
             if (id == null)
             {
