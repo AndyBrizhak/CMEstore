@@ -59,7 +59,7 @@
                             <label asp-for="BrandId"></label>
                         </div>
                         <div class="col-8">
-                            <select asp-for="BrandId" asp-items="@ViewBag.BrandDropDown" class="form-control">
+                            <select asp-for="BrandId" asp-items="@ViewData["BrandDropDown"] as IEnumerable<SelectListItem>" class="form-control">
                                 <option disabled selected>--Выберете Производителя--</option>
                             </select>
                             <span asp-validation-for="BrandId" class="text-danger"></span> 

@@ -50,7 +50,8 @@ namespace CMEstore.Controllers
                 Value = i.Id.ToString()
             });
 
-            ViewBag.BrandDropDown = BrandDropDown;
+                //ViewBag.BrandDropDown = BrandDropDown;
+                ViewData["BrandDropDown"] = BrandDropDown;
 
             Product product = new Product();
             if (id == null)
