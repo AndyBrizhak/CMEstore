@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CMEstore.Data;
 using CMEstore.Models;
+using CMEstore.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CMEstore.Controllers
@@ -44,28 +45,40 @@ namespace CMEstore.Controllers
         /// <returns></returns>
         public IActionResult Upsert(int? id)
         {
-            IEnumerable<SelectListItem> BrandDropDown = _db.Brand.Select(i => new SelectListItem
+            //IEnumerable<SelectListItem> BrandDropDown = _db.Brand.Select(i => new SelectListItem
+            //{
+            //    Text = i.Name,
+            //    Value = i.Id.ToString()
+            //});
+
+            //ViewBag.BrandDropDown = BrandDropDown;
+            //ViewData["BrandDropDown"] = BrandDropDown;
+
+            //Product product = new Product();
+
+            ProductVM productVM = new ProductVM()
             {
-                Text = i.Name,
-                Value = i.Id.ToString()
-            });
+                Product = new Product(),
+                BrandSelectList = _db.Brand.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                })
+            };
 
-                //ViewBag.BrandDropDown = BrandDropDown;
-                ViewData["BrandDropDown"] = BrandDropDown;
 
-            Product product = new Product();
             if (id == null)
             {
                 //this is for create
-                return View(product);
+                return View(productVM);
             }
 
-            product = _db.Product.Find(id);
-            if (product == null)
+            productVM.Product = _db.Product.Find(id);
+            if (productVM.Product == null)
             {
                 return NotFound();
             }
-            return View(product);
+            return View(productVM);
         }
 
         /// <summary>
