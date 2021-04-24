@@ -151,7 +151,12 @@ namespace CMEstore.Controllers
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            productVM.BrandSelectList = _db.Brand.Select(i => new SelectListItem
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
+            return View(productVM);
         }
 
         /// <summary>
