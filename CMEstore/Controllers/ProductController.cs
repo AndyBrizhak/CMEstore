@@ -31,12 +31,15 @@ namespace CMEstore.Controllers
         /// <returns></returns>
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _db.Product;
+            //IEnumerable<Product> objList = _db.Product;
 
-            foreach (var obj in objList)
-            {
-                obj.Brand = _db.Brand.FirstOrDefault(u => u.Id == obj.BrandId);
-            };
+            //Eager Loading
+            IEnumerable<Product> objList = _db.Product.Include(u => u.Brand);
+
+            //foreach (var obj in objList)
+            //{
+            //    obj.Brand = _db.Brand.FirstOrDefault(u => u.Id == obj.BrandId);
+            //};
 
             return View(objList);
         }
