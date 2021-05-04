@@ -2,21 +2,33 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using CMEstore.Data;
+using CMEstore.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace CMEstore.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
         public IActionResult Index()
         {
-            return View();
+            HomeVM homeVM = new HomeVM()
+            {
+                Products = _db.Product.Include(u => u.Brand),
+                Brands = _db.Brand
+            };
+           
+            return View(homeVM);
         }
 
         public IActionResult Privacy()
