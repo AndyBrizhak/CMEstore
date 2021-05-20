@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Linq;
 using CMEstore.Data;
 using CMEstore.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,17 @@ namespace CMEstore.Controllers
             };
            
             return View(homeVM);
+        }
+
+        public IActionResult Details(int id)
+        {
+            DetailsVM DetailsVM = new DetailsVM()
+            {
+                Product = _db.Product.Include(u => u.Brand).FirstOrDefault(u => u.Id == id),
+                ExistsInCart = false
+            };
+
+            return View(DetailsVM);
         }
 
         public IActionResult Privacy()
