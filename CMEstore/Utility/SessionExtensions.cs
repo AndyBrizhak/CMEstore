@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Text.Json;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CMEstore.Utility
 {
-    public class SessionExtensions
+    public static class SessionExtensions
     {
         public static void Set<T>(this ISession session, string key, T value)
         {
